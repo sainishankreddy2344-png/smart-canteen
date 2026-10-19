@@ -249,7 +249,24 @@ export default function App() {
           <div className="menu-layout">
             <div className="food-grid">
               {menu.map((item, index) => <article className="food-card" key={item.id}>
-                <div className={`food-visual food-${index % 5}`}><span>{['🥪','🥞','🍘','🍚','☕'][index % 5]}</span><small>{item.prep_minutes} min prep</small></div>
+               
+<div className={`food-visual food-${index % 5}`}>
+  <span>
+    {(() => {
+      const name = item.name.toLowerCase();
+
+      if (name.includes('idli')) return '🍘';
+      if (name.includes('dosa')) return '🥞';
+      if (name.includes('tea')) return '☕';
+      if (name.includes('fried rice')) return '🍚';
+      if (name.includes('sandwich')) return '🥪';
+
+      return '🍽️';
+    })()}
+  </span>
+  <small>{item.prep_minutes} min prep</small>
+</div>
+
                 <div className="food-info"><h3>{item.name}</h3><p>{item.description || 'Made fresh at the campus canteen.'}</p>
                   <div className="food-bottom"><b>{money(item.price_paise)}</b><button className="add-button" onClick={() => addToCart(item)}>+ Add</button></div>
                 </div>
