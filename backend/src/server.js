@@ -11,7 +11,14 @@ import adminRoutes from './routes/admin.js';
 
 const app = express();
 app.use(helmet());
-app.use(cors({ origin: process.env.CLIENT_ORIGIN || 'http://localhost:5173' }));
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'http://localhost:5175',
+    'https://smart-canteen-chmvsxlyv-sai-acaf.vercel.app'
+  ]
+}));
 app.use(express.json({ limit: '1mb' }));
 
 app.get('/api/health', (_req, res) => res.json({ status: 'ok', app: 'Smart Canteen API' }));
